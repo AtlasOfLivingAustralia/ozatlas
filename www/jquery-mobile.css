@@ -1,0 +1,100 @@
+#about h2, #about p.h2 {
+	font-weight:normal;
+	font-size:16px;
+	line-height:24px;
+	margin-left:184px;
+}
+#about p {
+	font-size:12px;
+	line-height:20px;
+/*	margin-left:184px; // this is problematic on iphone */ 
+}
+#about img {
+	float:left;
+	padding:12px 0 0 12px;
+}
+
+.gallery { list-style: none; padding: 0; margin: 0; }
+.gallery:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+.gallery li { float: left; width: 33.33333333%; }
+.gallery li a { display: block; margin: 5px; border: 1px solid #3c3c3c; }
+.gallery li img { display: block; width: 100%; height: auto; }
+#Gallery1 .ui-content, #Gallery2 .ui-content { overflow: hidden; }
+.ui-content-mapping {padding:8px;}
+
+/** conservation status' **/
+
+.status > div span {
+	height:40px;
+	width:40px;
+	margin:0 6px 12px 0;
+	display:inline-block;
+	font-weight:bold;
+	line-height:40px;
+	color:#333a3f;
+	text-align:center;
+	-moz-border-radius: 2em; 
+	-webkit-border-radius: 2em;
+	border-radius: 2em; /* Opera 10.5, IE 9 */
+	font-variant:small-caps;
+	border:1px solid #3d464c;
+	background-color:#fff;
+}
+
+.status > div span.green {
+	background-color:#43c205;
+	border-color:#43c205;
+	color:#fff;
+}
+.status > div span.yellow {
+	background-color:#ffbb00;
+	border-color:#ffbb00;
+}
+
+.status > div span.red {
+	background-color:#e30202;
+	border-color:#e30202;
+	color:#fff;
+}
+
+.status > div span.marine {
+	border-color:#3a5c83;
+	background:#3a5c83 url(images/status_marine.png) center center no-repeat;
+}
+
+.status > div span.terrestrial {
+	border-color:#809325;
+	background:#fff url(images/status_terrestrial.png) center center no-repeat;
+}
+
+.status > div span.terrestrial-aquatic {
+	border-color:#3a5c83;
+	background:#fff url(images/status_terrestrial-aquatic.png) center center no-repeat;
+}
+
+.status > div span.native {
+	border-color:#3d464c;
+	background:#3d464c url(images/status_native.png) center center no-repeat;
+}
+
+.status > div span.nonnative {
+	border-color:#3d464c;
+	background:#3d464c url(images/status_nonnative.png) center center no-repeat;
+}
+
+.status div.last {
+	margin:0;
+}
+
+#imageList { list-style: none; padding: 0; margin: 0; }
+.imageCreator { clear:right; font-size:10px; } 
+.imageRights { clear:right; font-size:10px; }
+.searchResultHdr { margin: 0 0 .6em 0; } 
+.ui-field-contain { padding: .4em; }
+.speciesSearchForm {margin-bottom:30px; }
+.ui-btn-inner { padding: .6em 15px; }
+
+.ui-body-a, .ui-body-b { background-color: #3d5a78; }
+
+#imageAttributionList a {color:white;}
+#taxonomicList a {color:white;}
