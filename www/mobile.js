@@ -75,10 +75,10 @@ function setMapCanvasSize(){
 
         if ($(window).height() > 400) {
             mapdiv.style.width = ($(window).width() - 20) + 'px';
-            mapdiv.style.height = ($(window).height() - 180) + 'px';
+            mapdiv.style.height = ($(window).height() - 160) + 'px';
             $(window).resize(function () {
                 mapdiv.style.width = ($(window).width() - 20) + 'px';
-                mapdiv.style.height = ($(window).height() - 180) + 'px';
+                mapdiv.style.height = ($(window).height() - 160) + 'px';
             });
         } else {
             mapdiv.style.width = '304px';
@@ -1349,6 +1349,8 @@ function setOverlayMarker(zoomToBounds) {
 		
 		//FIXME - only do this when the lat/lng has changed.
 		setLocality(OZA.marker.getPosition().lat(),OZA.marker.getPosition().lng())
+		
+		$('#radiusDisplayValue').html(getRadiusDescription());		
   	}
 }
 
@@ -1929,6 +1931,14 @@ function getAreaDescription(){
 	}
 }
 
+function getRadiusDescription(){
+	if (OZA.circle.getRadius() > 1000) {
+		return (OZA.circle.getRadius() / 1000) + ' km';
+	} else {
+		return OZA.circle.getRadius() + ' metres';
+	}
+}
+
 function initialiseFromConfig() {
 
     //if display large, use better quality images              
@@ -1939,6 +1949,9 @@ function initialiseFromConfig() {
     } 
     if ($(window).width() > 600) {
         $('.aboutText').css({'margin-left': '184px'});
+        $('#radiusDisplay').css({'display':'block', 'padding-left':'30px', 'padding-right':'30px'});
+    } else {
+    	$('#radiusDisplay').css({'display':'none'});
     }
         
     if ($(window).width() < 500 ||  $(window).height() < 750) {

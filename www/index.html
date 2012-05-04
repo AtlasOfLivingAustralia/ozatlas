@@ -421,7 +421,11 @@
 				<div id="map_canvas" style="margin-top:10px;">
                 
                 </div>
-                <p id="exploreAreaHelp" class="exploreYourAreaHelp" style="font-size: 11px; float:left; max-wdth:20px;">Use zoom<br/> to alter 	<br/>radius
+                <p id="exploreAreaHelp" class="exploreYourAreaHelp" style="font-size: 11px; float:left;">Use zoom<br/> to alter 	<br/>radius
+                </p>
+                <p id="radiusDisplay" style="display:none; float:left; padding-top:0; margin-top:10px;">                
+                <span>Current radius</span><br/>
+                <span id="radiusDisplayValue" style="font-weight:bold;"></span>                
                 </p>
 				<a id="setToCurrentLocation" data-role="button" href="javascript:setMarkerToCurrentLocation();" data-inline="true">My location</a>
                 <a href="#details" id="nextActionFromLocation" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Next</a>
@@ -512,7 +516,7 @@
                 <div data-role="collapsible" data-theme="b" data-content-theme="c" data-collapsed="true">
                     <h3>Explore your area</h3>
                     <div data-role="fieldcontain">
-                        <fieldset data-role="controlgroup" data-type="horizontal">
+                        <fieldset data-role="controlgroup">
                             <input type="radio" name="radio-group-browser-selector" id="radio-simple-browser" value=""/>
                             <label for="radio-simple-browser">Simple</label>                            
 
@@ -522,7 +526,10 @@
                             <input type="radio" name="radio-group-browser-selector" id="radio-taxonomy-browser" value=""/>
                             <label for="radio-taxonomy-browser">Taxonomy</label>    
                         </fieldset>
-						<p><strong>Note: </strong>Lifeforms are simple groups for species e.g. Birds, Frogs. Taxonomy will give you a taxonomic hierarchy starting at the kingdom level e.g. Animalia.</p>                                                                            
+						<p><strong>Note: </strong>"Simple" uses simple groups for species e.g. Birds, Frogs. 
+						Advanced for more specialised groups.
+						Taxonomy will give you a taxonomic hierarchy starting at the kingdom level e.g. Animalia.						
+						</p>                                                                            
                     </div>
                     
                     <div data-role="fieldcontain">
@@ -532,7 +539,7 @@
                             <input type="radio" name="radio-name-order-selector" id="radio-name-order-scientific" value=""/>
                             <label for="radio-name-order-scientific">Scientific</label>                            
                         </fieldset>
-						<p>Sort names in results by common name or scientific name</p>                                                                            
+						<p>Sort names in results by common name or scientific name.</p>                                                                            
                     </div>                                        
                 </div>
                 
@@ -562,7 +569,7 @@
                     <h3>Species pages</h3>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup" data-type="horizontal">
-                            <label for="numberOfImagesToShow">Number of images:</label>                                                                                                           
+                            <label for="numberOfImagesToShow" style="padding-right:20px;">Number of images:</label>                                                                                                           
                             <select name="numberOfImagesToShow" id="numberOfImagesToShow">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
