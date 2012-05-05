@@ -1964,7 +1964,7 @@ function initialiseFromConfig() {
     	$('#radiusDisplay').css({'display':'none'});
     }
         
-    if ($(window).width() < 500 ||  $(window).height() < 750) {
+    if ($(window).width() < 500 ||  $(window).height() < 700) {
         console.log("Use small images for landing background....");
         $('#home').removeClass('largeBackgroundImage');
         $('#home').addClass('smallBackgroundImage');
