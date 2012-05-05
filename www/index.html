@@ -3,9 +3,6 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="user-scalable=no, width=device-width,  initial-scale=1, minimum-scale=1,  maximum-scale=1"/>
-      
-        <!--<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0"/>       -->
-      
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<title>Mobile | Atlas of Living Australia</title>
 		<link href="ala2011.css" type="text/css" rel="stylesheet" />
@@ -19,11 +16,11 @@
 		<script type="text/javascript" src="jquery.dateFormat-1.0.min.js"></script>
 		<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
 		<script type="text/javascript" src="code.photoswipe.jquery-3.0.4.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>            
+   		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>            
 		<script type="text/javascript" src="mobile.js"></script>
 		<script type="text/javascript">
             
-      console.log("Starting OzAtlas app load...");
+      	console.log("Starting OzAtlas app load...");
             
 			if( typeof PhoneGap !== 'undefined') {
 				PhoneGap.addConstructor(function() {
@@ -66,7 +63,7 @@
 					console.log('unabled to load photoswipe');
 				}
                         
-        try {        
+       			try {        
 					//$.mobile.autoInitializePage = false;
 //					$.mobile.defaultPageTransition = 'none';
 					//$.mobile.touchOverflowEnabled = false;
@@ -99,7 +96,7 @@
 				        $('#nextActionFromLocation').attr('href', '#exploreYourArea');
 				    }					
 				} else {
-					$('#nextActionFromLocation').attr('href', 'javascript:openLocationForRecording();');				
+					$('#nextActionFromLocation').attr('href', '#details');				
 				}	
 				google.maps.event.trigger(OZA.map,'resize');		
 			});
@@ -198,7 +195,6 @@
 			</div><!-- /content -->
 		</div><!-- /page one -->
         
-        
 		<!-- Start of second page: #savedData -->
 		<div data-role="page" id="savedData" data-theme="b" class="gallery-page" data-add-back-btn="true" >
 			<div data-role="header"  data-theme="b">
@@ -213,7 +209,6 @@
 			</div><!-- /content -->
 		</div><!-- /page search -->
         
-        
 		<!-- Start of second page: #savedData -->
 		<div data-role="page" id="savedImageViewer" data-theme="b" data-add-back-btn="true" >
 			<div data-role="header"  data-theme="b">
@@ -225,7 +220,6 @@
 			</div><!-- /content -->
 		</div><!-- /page search -->                
         
-        
 		<!-- Start of second page: #speciesSearch -->
 		<div data-role="page" id="speciesSearch" data-theme="b"   data-add-back-btn="true">
 			<div data-role="header"  data-theme="b">
@@ -233,12 +227,16 @@
 				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 			</div><!-- /header -->
 			<div data-role="content"  data-content-theme="c">
-				<form action="javascript:search();" method="get" class="speciesSearchForm">
+				<form action="javascript:$('#focusableForSpeciesSearch').focus();search();" method="get" class="speciesSearchForm">
                     <div data-role="fieldcontain">
                             <label for="initialSearch" class="ui-hidden-accessible">Search:</label>
                             <input id="initialSearch" value="" type="search" name="search" placeholder="Search with species name"
                             data-theme="c"/>
-                    </div>    
+                    </div> 
+					<div style="height:0;width:0;position:absolute; left:-999px;">
+			    	    <input id="focusableForSpeciesSearch" type="checkbox" />
+				    </div>	                    
+                       
 				</form>
 				<div>
 					<ul id="searchResults" data-role="listview"></ul>
@@ -413,10 +411,13 @@
 				<a href="#home" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content-mapping">
-				<form action="javascript:searchForPlace();" method="get">
+				<form action="javascript:$('#focusableForPlaceSearch').focus();searchForPlace();" method="get">
 					<label for="placeName" class="ui-hidden-accessible">Place name:</label>
 					<input id="placeSearch" value="Type an address" type="search" name="search" 
 					data-theme="c"/>
+					<div style="height:0;width:0;position:absolute; left:-999px;">
+			    	    <input id="focusableForPlaceSearch" type="checkbox" />
+				    </div>					
 				</form>
 				<div id="map_canvas" style="margin-top:10px;">
                 

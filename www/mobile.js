@@ -91,10 +91,10 @@ function setMapCanvasSize(){
 }
 
 function openLocationForExplore() {
-    OZA.usingExploreYourArea = true;    
+  OZA.usingExploreYourArea = true;    
 
 	if(!OZA.mapInitialised){
-      console.log('[openLocationForExplore] Map not initialised.....')
+    console.log('[openLocationForExplore] Map not initialised.....');
 	  // get a location to start
       navigator.geolocation.getCurrentPosition(
     	  function(position){
@@ -111,6 +111,8 @@ function openLocationForExplore() {
     	  }
       );  	
     } else {
+      console.log('[openLocationForExplore] Map initialised.....setting visibility');
+      OZA.circle.setVisible(true);      
     	$.mobile.changePage('#location');
     } 
 }
@@ -123,26 +125,28 @@ function openLocationForRecording() {
 	  console.log('Map not initialised, starting.....');	
 	
 	  // get a location to start
-      navigator.geolocation.getCurrentPosition(
-    	function(position){
+	  navigator.geolocation.getCurrentPosition(
+		function(position){
 		  initialiseMap(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-    	}, 
-    	function(position){
+		  //OZA.locationSetByUser = true;
+		}, 
+		function(position){
 		  initialiseMap(new google.maps.LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE));        	
-    	}
-      );  	
-    } 
-    
-    OZA.usingExploreYourArea = false;
-    //remove the overlay if its there
-    removeOverlayMarker();
-    $('.exploreYourAreaHelp').css({'display': 'none'});
-    $('#nextActionFromLocation').attr('href', '#details');
-    $.mobile.changePage('#location');
-    
-    console.log('Location set by user: ' + OZA.locationSetByUser);
-    if(!OZA.mapInitialised){
-    	setMarkerToCurrentLocation();
+		  //OZA.locationSetByUser = true;
+		}
+	  );  	
+	} 
+	
+	OZA.usingExploreYourArea = false;
+	//remove the overlay if its there
+	removeOverlayMarker();
+	$('.exploreYourAreaHelp').css({'display': 'none'});
+	$('#nextActionFromLocation').attr('href', '#details');
+	$.mobile.changePage('#location');
+	
+	console.log('Location set by user: ' + OZA.locationSetByUser);
+	if(!OZA.mapInitialised){
+		setMarkerToCurrentLocation();
 		OZA.locationSetByUser = true;
     }	    
 }
@@ -739,12 +743,18 @@ function exploreByMultiGroups() {
 		
 			for(var i=0; i<data.length; i++){
 				$('#exploreByMultiGroupsList').append('<li data-role="list-divider">' + data[i].groupName + '</li>');
+				
+				//<li><a href=' + javascriptLink + '><img src=\'images/' + data[i].name + '.jpg\'/><h3>' + data[i].name + '</h3><span class="ui-li-count">' + data[i].speciesCount + '</span><p><span class="currentLocation"></span></p></a></li>
+				
 				for(var j=0; j<data[i].groups.length; j++){
-					$('#exploreByMultiGroupsList').append('<li><a href="javascript:exploreMultiGroup(\''+data[i].facetName+'\',\''+data[i].groups[j].scientificName+'\',\''+data[i].groups[j].commonName+'\');"><img src="multigroupImages/'+data[i].groups[j].scientificName.toLowerCase()+'.jpg"/>'+data[i].groups[j].commonName+'</a></li>');
+					$('#exploreByMultiGroupsList').append('<li><a href="javascript:exploreMultiGroup(\''+data[i].facetName+'\',\''+data[i].groups[j].scientificName+'\',\''+data[i].groups[j].commonName+'\');"><img src="multigroupImages/'+data[i].groups[j].scientificName.toLowerCase()+'.jpg"/><h3>'+data[i].groups[j].commonName+'</h3><p><span class="currentLocation"></span></p></a></li>');
 				}
 			}
 			$('#exploreByMultiGroupsList').listview('refresh');
-	
+            $('.currentLocation').each(function () {
+                $(this).html(getAreaDescription());
+            });			
+			
 			hidePageLoadingMsg();
 		}).error(function () {
 			hidePageLoadingMsg();
@@ -1203,25 +1213,21 @@ function setCurrentLocationToMarkerCoords() {
 }
 
 function recordSighting() {
+	console.log('[recordSighting] starting .....');
 
     //initialise
     OZA.recordSent = false;
-    $('#postRecord').buttonMarkup({
-        theme: "a"
-    });
-    $('#postRecord .ui-btn-text').text('Record your sighting');
     OZA.usingExploreYourArea = false;
+    
+    $('#postRecord').buttonMarkup({theme: "a"});
+    $('#postRecord .ui-btn-text').text('Record your sighting');
     $('#nextActionFromLocation').attr('href', '#details');
-    if (OZA.circle != null) {
-        OZA.circle.setMap(null);
-    }
 
     if (typeof FileReader !== "undefined") {
         console.log('File reader is available for this browser....');
         $.mobile.changePage('#photoUpload');
     } else {
         console.log('File reader is NOT available for this browser. Sending to set Location...');
-        //$.mobile.changePage('#location');
         openLocationForRecording();
     }
 }
@@ -1268,6 +1274,9 @@ function getRadiusForCurrentZoom() {
         
         if(radius < 100000){
         	console.log('Calculated radius (/2.5): ' + radius);
+        	if(radius > 1000){
+        		return (Math.round(radius /1000) * 1000);
+        	}        	
             return radius;
         } else {
         	console.log('Calculated radius (/2.5): ' + radius + ', returning the max: ' + 100000);
@@ -1933,7 +1942,7 @@ function getAreaDescription(){
 
 function getRadiusDescription(){
 	if (OZA.circle.getRadius() > 1000) {
-		return (OZA.circle.getRadius() / 1000) + ' km';
+		return Math.round(OZA.circle.getRadius() / 1000) + ' km';
 	} else {
 		return OZA.circle.getRadius() + ' metres';
 	}
