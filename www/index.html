@@ -87,6 +87,11 @@
 
 			$('#location').live('pageshow', function(event) {
 				if(OZA.usingExploreYourArea){
+					if($(window).width() > 600){
+						$('#radiusDisplay').css({'display':'block'});
+					}
+					$('.exploreYourAreaHelp').css({'display':'block'});				
+				
 					$('#nextActionFromLocation').attr('href', 'javascript:openLocationForExplore;');				
     				if (OZA.exploreYourAreaBrowser == EYA.TAXONOMY) {
 				        $('#nextActionFromLocation').attr('href', 'javascript:startExploreByTaxonomy();');        

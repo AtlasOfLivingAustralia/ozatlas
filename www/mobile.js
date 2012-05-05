@@ -61,7 +61,9 @@ EYA.TAXONOMY = 2;
 function setupPhotoSwipe(galleryId){
     OZA.photoSwipe = $('#' + galleryId +' a').photoSwipe({
         enableMouseWheel: false,
-        enableKeyboard: false
+        enableKeyboard: false,
+        allowUserZoom: false,
+        doubleTapZoomLevel: 1
     });
 }
 
@@ -141,6 +143,7 @@ function openLocationForRecording() {
 	//remove the overlay if its there
 	removeOverlayMarker();
 	$('.exploreYourAreaHelp').css({'display': 'none'});
+	$('#radiusDisplay').css({'display': 'none'});
 	$('#nextActionFromLocation').attr('href', '#details');
 	$.mobile.changePage('#location');
 	
@@ -220,6 +223,9 @@ function initialiseMapForExplore(latLng){
     OZA.usingExploreYourArea = true;
     console.log('Using explore by : ' + OZA.exploreYourAreaBrowser);
     $('.exploreYourAreaHelp').css({'display': 'block'});    
+    if($(window).width() > 600){
+	    $('#radiusDisplay').css({'display': 'block'});    
+    }    
 }
 
 function searchForPlace() {
@@ -2043,7 +2049,6 @@ function initialiseFromConfig() {
         OZA.noOfImagesToShow = $('#numberOfImagesToShow').val();   
     	localStorage.setItem('ala-numberOfImagesToShow',OZA.noOfImagesToShow);
     });    
-
         
 	//sort results by common or scientific name
     $('input:radio[name=radio-name-order-selector]')[0].checked = true;
@@ -2058,12 +2063,12 @@ function initialiseFromConfig() {
     
     
 	// show a search result if we have images for it
-    $('input:radio[name=radio-search-image-only-selector]')[0].checked = true;
-    $('input:radio[name=radio-search-image-only-selector]')[1].checked = false;	
+    $('input:radio[name=radio-search-image-only-selector]')[0].checked = false;
+    $('input:radio[name=radio-search-image-only-selector]')[1].checked = true;	
     var storedResultsWithImagesOnly = localStorage.getItem('ala-resultsWithImagesOnly');
-    if(storedResultsWithImagesOnly == 'false'){
-	    $('input:radio[name=radio-search-image-only-selector]')[0].checked = false;
-	    $('input:radio[name=radio-search-image-only-selector]')[1].checked = true;	    
+    if(storedResultsWithImagesOnly == 'true'){
+	    $('input:radio[name=radio-search-image-only-selector]')[0].checked = true;
+	    $('input:radio[name=radio-search-image-only-selector]')[1].checked = false;	    
     }    
     $('#radio-search-image-only-on').bind('click', function (e, data) { setResultsWithImagesOnly(true); });
     $('#radio-search-image-only-off').bind('click', function (e, data) { setResultsWithImagesOnly(false); });    
