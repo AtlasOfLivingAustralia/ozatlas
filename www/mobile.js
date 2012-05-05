@@ -1875,6 +1875,7 @@ function authenticate(userName, password) {
 function loadExploreYourAreaGroups() {
 
     console.log('Loading explore your area with counts...');
+    OZA.usingExploreYourArea = true;
 
     //alert(searchUrl);
     showPageLoadingMsg('Loading groups (simple)...');

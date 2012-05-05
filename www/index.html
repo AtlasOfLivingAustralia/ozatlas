@@ -133,8 +133,14 @@
 			});
 
 			$('#exploreYourArea').live('pagebeforeshow', function(event) {
-                loadExploreYourAreaGroups();                       
+          		loadExploreYourAreaGroups();                       
 			});
+      
+			$('#location').live('pagebeforeshow', function(event) {
+                          if(OZA.usingExploreYourArea && OZA.circle !=null){
+                          OZA.circle.setVisible(true);
+                          }
+      });      
 
 			$('#yourDetails').live('pagebeforeshow', function(event) {
 				updateAuthSettings();
