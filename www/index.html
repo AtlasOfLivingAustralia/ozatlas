@@ -33,6 +33,28 @@
 
 			// Wait for PhoneGap to load
 			document.addEventListener('deviceready', onDeviceReady, false);
+			
+			document.addEventListener('touchmove',blockTouchMove,false);
+			function blockTouchMove(event) {
+		    	// Prevent scrolling on this element
+		    	//only allow scrolling on certain pages
+		    	//which includes latestImages/
+		    	var currentPage =  $('.ui-page-active').attr('id');
+		    	
+		    	//console.log('Active page:' + $('.ui-page-active').attr('id'));
+		    	
+//		    	console.log(event);
+				if(currentPage === 'home' || currentPage === 'location' 
+					//&& currentPage != 'speciesSearch'
+					//&& currentPage != 'speciesPage'
+					//&& currentPage != 'exploreGroup'					
+					//&& currentPage != 'exploreGroup'										
+					
+					){
+				    event.preventDefault();
+				}
+			}
+			
 
 			// PhoneGap is ready
 			function onDeviceReady() {

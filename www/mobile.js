@@ -4,6 +4,8 @@ var DEFAULT_LATITUDE = -33.87;
 var DEFAULT_LONGITUDE = 151.2071
 var DEFAULT_BOUNDS = new google.maps.LatLngBounds(new google.maps.LatLng(-41, 118), new google.maps.LatLng(-14, 148));
 
+var supportedGroupsForEA = new Array("Amphibians","Angiosperms","Birds","Mammals","Insects","Bryophytes","Crustaceans","Dicots","FernsAndAllies","Fish","Algae","Fungi","Gymnosperms","Molluscs","Monocots","Reptiles");
+
 var OZA = {
     latestImagesStartIndex: 0,
     latestImagesPageSize: 50,
@@ -38,7 +40,8 @@ var OZA = {
     lastMultiGroupQuery: '',
     orderByCommonName: true,
     noOfSearchResults: 30,
-    onlyTaxaWithImagesInSearchResults: false    
+    onlyTaxaWithImagesInSearchResults: false,
+    supportedGroups: supportedGroupsForEA
 }
 
 var M_URL = 'https://m.ala.org.au';
@@ -1905,8 +1908,7 @@ function loadExploreYourAreaGroups() {
 
             for (var i = 0; i < data.length; i++) {
                 console.log(data[i].name + ' : ' + data[i].speciesCount);
-                if (data[i].speciesCount > 0 && data[i].name != "Arthropods" && data[i].name != "Animals" && data[i].name != "ALL_SPECIES" && 
-                	data[i].name != "Chromista" && data[i].name != "Protozoa" && data[i].name != "Bacteria") {
+                if (data[i].speciesCount > 0 && $.inArray(data[i].name, OZA.supportedGroups) != -1 ) {
 
                     var javascriptLink = "\"javascript:exploreGroup('" + data[i].name + "');\"";
 
