@@ -488,7 +488,7 @@ function openSpeciesPage(guid) {
         }
 
         $('#occurrenceMap').append('<h4>Occurrences map</h4>');
-        $('#occurrenceMap').append('<img src="http://m.ala.org.au/ws/density/map?q=lsid:' + data.taxonConcept.guid + '"/>');
+        $('#occurrenceMap').append('<img src="https://m.ala.org.au/ws/density/map?q=lsid:' + data.taxonConcept.guid + '"/>');
 
         if (OZA.useLargerImages) {
             $('#occurrenceMap img').css({
@@ -1925,7 +1925,7 @@ function loadExploreYourAreaGroups() {
 
             $('.currentLocation').each(function () {
                 $(this).html(getAreaDescription());
-            });
+                                                           });
 
             $('#speciesGroupsList').listview('refresh');
             hidePageLoadingMsg();
