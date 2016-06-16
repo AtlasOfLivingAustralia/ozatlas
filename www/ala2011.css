@@ -891,3 +891,6 @@ a.ui-link-inherit {
 .ui-mobile-nosupport-boxshadow .ui-focus {
 	outline-width: 2px;
 }
+
+overflow-y:scroll;
+-webkit-overflow-scrolling: auto;
