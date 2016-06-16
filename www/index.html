@@ -10,11 +10,11 @@
 		<link href="jquery-mobile.css" type="text/css" rel="stylesheet" />
 		<link href="photoswipe.min.css" type="text/css" rel="stylesheet" />
         <!-- NOTE: Phonegap JS import should be removed for web deployments -->
-		<script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script type="text/javascript" src="klass.min.js"></script>
 		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="jquery.dateFormat-1.0.min.js"></script>
-		<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.1.2.js"></script>
 		<script type="text/javascript" src="code.photoswipe.jquery-3.0.4.min.js"></script>
    		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>            
 		<script type="text/javascript" src="mobile.js"></script>
@@ -123,9 +123,9 @@
 				        $('#nextActionFromLocation').attr('href', '#exploreYourArea');
 				    }					
 				} else {
-					$('#nextActionFromLocation').attr('href', '#details');				
-				}	
-				google.maps.event.trigger(OZA.map,'resize');		
+					$('#nextActionFromLocation').attr('href', '#details');
+				}
+				google.maps.event.trigger(OZA.map,'resize');
 			});
 /*
 			$('#location').live('page', function(event) {
@@ -160,7 +160,7 @@
 			});
 
 			$('#exploreYourArea').live('pagebeforeshow', function(event) {
-          		loadExploreYourAreaGroups();                       
+          		loadExploreYourAreaGroups();
 			});
       
 			$('#location').live('pagebeforeshow', function(event) {
@@ -198,7 +198,7 @@
             });              
 
             //cleanup
-			$('#exploreYourArea' ).live( 'pagehide',function(event, ui){ hidePageLoadingMsg(); });            
+			$('#exploreYourArea' ).live( 'pagehide',function(event, ui){ hidePageLoadingMsg(); });
 			$('#latestImages' ).live( 'pagehide',function(event, ui){ hidePageLoadingMsg(); });            			
 			$('#exploreGroup' ).live( 'pagehide',function(event, ui){ hidePageLoadingMsg(); });            						
 			
